@@ -1,0 +1,24 @@
+👉---Recursion-------------------------------------------------
+T.C O(2^n)
+S.C O(n) +O(n+n)(stack space)
+
+class Solution {
+public:
+    void f(vector<int>& nums,vector<int>&temp,vector<vector<int>>&ans,int n){
+        if(n<0){
+            ans.push_back(temp);
+            return ;
+        }
+        temp.push_back(nums[n]);
+        f(nums,temp,ans,n-1);
+        temp.pop_back();
+        f(nums,temp,ans,n-1);
+    }
+    vector<vector<int>> subsets(vector<int>& nums) {
+        int n=nums.size();
+        vector<vector<int>>ans;
+        vector<int>temp;
+        f(nums,temp,ans,n-1);
+        return ans;
+    }
+};
