@@ -1,0 +1,24 @@
+class Solution {
+public:
+    void f(vector<int>& nums,set<vector<int>>&st,int n,vector<int>&ans){
+        if(n<0){
+            st.insert(ans);
+            return ;
+        }
+        ans.push_back(nums[n]);
+        f(nums,st,n-1,ans);
+        ans.pop_back();
+        f(nums,st,n-1,ans);
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        set<vector<int>>st;
+        sort(nums.begin(),nums.end());
+        vector<int>ans;
+        int n=nums.size()-1;
+        f(nums,st,n,ans);
+        vector<vector<int>>res(st.begin(),st.end());
+        sort(res.begin(),res.end());
+        return res;
+
+    }
+};
