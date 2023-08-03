@@ -1,0 +1,25 @@
+class Solution {
+public:
+    void f(int i,vector<int>& arr, int target,set<vector<int>>&st,vector<int>&val){
+        if(i==arr.size()){
+            if(target==0){
+                st.insert(val);
+            }
+            return;
+        }
+        if(arr[i]<=target){
+            val.push_back(arr[i]);
+            f(i+1,arr,target-arr[i],st,val);
+        val.pop_back();
+        }
+        f(i+1,arr,target,st,val);
+    }
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        set<vector<int>>st;
+        vector<int>val;
+        sort(candidates.begin(),candidates.end());
+        f(0,candidates,target,st,val);
+        vector<vector<int>>ans(st.begin(),st.end());
+        return ans;
+    }
+};
